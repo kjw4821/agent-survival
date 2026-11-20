@@ -3,8 +3,8 @@ extends Node2D
 const ProjectileBody = preload("res://combat/projectile.gd")
 const PROJECTILE_SCENE := preload("res://combat/projectile.tscn")
 
-@export var shot_interval := 0.22
-@export var damage := 20
+@export var shot_interval := 0.08
+@export var damage := 3
 
 var projectiles: Node2D
 var cooldown := 0.0

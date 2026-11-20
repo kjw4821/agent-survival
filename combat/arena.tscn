@@ -43,6 +43,6 @@ theme_override_constants/separation = 18
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="Restart" type="Button" parent="HUD/Result/Content"]
+[node name="BackToBriefing" type="Button" parent="HUD/Result/Content"]
 custom_minimum_size = Vector2(0, 48)
-text = "Restart run"
+text = "Back to briefing"

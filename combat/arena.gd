@@ -13,7 +13,7 @@ const ARENA_SIZE := Vector2(960, 600)
 @onready var status: Label = $HUD/Status
 @onready var result: ColorRect = $HUD/Result
 @onready var summary: Label = $HUD/Result/Content/Summary
-@onready var restart: Button = $HUD/Result/Content/Restart
+@onready var back_to_briefing: Button = $HUD/Result/Content/BackToBriefing
 
 var elapsed := 0.0
 var spawn_cooldown := 0.0
@@ -25,7 +25,7 @@ var finished := false
 func _ready() -> void:
 	player.weapon.projectiles = $Projectiles
 	player.defeated.connect(_finish.bind(false))
-	restart.pressed.connect(_restart)
+	back_to_briefing.pressed.connect(_return_to_briefing)
 	_spawn_enemy()
 	_spawn_enemy()
 	spawn_cooldown = spawn_interval
@@ -87,11 +87,11 @@ func _finish(survived: bool) -> void:
 	enemies.process_mode = Node.PROCESS_MODE_DISABLED
 	$Projectiles.process_mode = Node.PROCESS_MODE_DISABLED
 	_update_hud()
-	var outcome := "Run cleared" if survived else "Run ended"
+	var outcome := "Run cleared" if survived else "Defeated"
 	summary.text = "%s\n%.1fs survived   ·   %d kills" % [outcome, elapsed, kills]
 	result.show()
-	restart.grab_focus()
+	back_to_briefing.grab_focus()
 
 
-func _restart() -> void:
-	get_tree().reload_current_scene()
+func _return_to_briefing() -> void:
+	get_tree().change_scene_to_file("res://ui/briefing.tscn")
